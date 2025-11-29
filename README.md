@@ -4,6 +4,7 @@ A modern web-based application for processing XCMS results, extracting MS2 spect
 
 ## Features
 
+- **Built-in XCMS Processing**: Process raw mzXML files directly with XCMS (requires R with XCMS package)
 - **Multi-format Support**: Upload spectral libraries in MSP, MGF, JSON, or mzML formats
 - **MS2Query Integration**: ML-assisted spectral matching for exact matches and analog searches
 - **Traditional Algorithms**: Fallback matching using dot product, cosine, and modified cosine similarity
@@ -11,6 +12,7 @@ A modern web-based application for processing XCMS results, extracting MS2 spect
 - **Interactive Visualization**: View spectra and compare query vs library matches
 - **Export Results**: Download matching results as CSV or JSON
 - **Modern UI**: Built with Tailwind CSS and Flowbite for a responsive, professional interface
+- **Flexible Workflow**: Use pre-processed XCMS results or process raw files on-the-fly
 
 ## Installation
 
@@ -18,6 +20,10 @@ A modern web-based application for processing XCMS results, extracting MS2 spect
 
 - Python 3.9 or higher
 - pip package manager
+- (Optional) R with XCMS package for built-in XCMS processing
+  - Install R from https://www.r-project.org/
+  - Install XCMS: `install.packages("xcms")` in R
+  - Install CAMERA: `install.packages("CAMERA")` in R
 
 ### Backend Setup
 
@@ -71,8 +77,9 @@ Then navigate to `http://localhost:8080`
 
 ### Workflow
 
-1. **Upload Files**:
-   - Upload your XCMS results CSV file (PeakTable)
+1. **Upload/Process Files**:
+   - **Option A**: Upload pre-processed XCMS results CSV file (PeakTable)
+   - **Option B**: Upload raw mzXML files and process with built-in XCMS
    - Upload one or more mzXML files containing MS2 spectra
    - Upload a spectral library file (MSP, MGF, JSON, or mzML format)
 
@@ -96,6 +103,12 @@ Then navigate to `http://localhost:8080`
 - `POST /api/upload/xcms` - Upload XCMS results CSV
 - `POST /api/upload/mzxml` - Upload mzXML file
 - `POST /api/upload/library` - Upload spectral library
+
+### XCMS Processing
+- `GET /api/xcms/check` - Check XCMS availability
+- `POST /api/xcms/process` - Process mzXML files with XCMS
+- `POST /api/xcms/process-from-yaml` - Process with parameters from YAML file
+- `GET /api/xcms/results/{result_id}` - Get XCMS processing results
 
 ### Data Processing
 - `GET /api/xcms/peaks?xcms_file=<filename>` - Get XCMS peak data

@@ -143,7 +143,12 @@ async def upload_library(file: UploadFile = File(...)):
 async def get_xcms_peaks(xcms_file: str):
     """Get XCMS peak data."""
     try:
-        file_path = UPLOAD_DIR / xcms_file
+        # Handle both uploaded files and XCMS-processed results
+        if xcms_file.startswith("xcms_output_"):
+            file_path = RESULTS_DIR / xcms_file
+        else:
+            file_path = UPLOAD_DIR / xcms_file
+        
         if not file_path.exists():
             raise HTTPException(status_code=404, detail="XCMS file not found")
         
@@ -198,7 +203,15 @@ async def match_spectra(request_data: Dict[str, Any] = Body(...)):
             config = MatchingConfig()
         
         mzxml_path = UPLOAD_DIR / mzxml_file
-        xcms_path = UPLOAD_DIR / xcms_file
+        
+        # Handle both uploaded files and XCMS-processed results
+        if xcms_file.startswith("xcms_output_"):
+            # XCMS processed result
+            xcms_path = RESULTS_DIR / xcms_file
+        else:
+            # Uploaded file
+            xcms_path = UPLOAD_DIR / xcms_file
+        
         library_path = UPLOAD_DIR / library_file
         
         if not mzxml_path.exists():
