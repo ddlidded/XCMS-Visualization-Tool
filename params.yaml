@@ -1,0 +1,22 @@
+ppm: 10
+peakwidth:
+- 5
+- 30
+snthresh: 6
+mzdiff: 0.01
+quant_method: into
+minfrac: 0.5
+minsamp: 0
+bw: 5
+mzwid: 0.006
+max_features: null
+plot_feature_eic: true
+use_previous: true
+rename_table: true
+remove_redundant: true
+prefilter:
+- 3
+- 100
+peak_detection_method: centWave
+peak_grouping_method: density
+rt_correction_method: obiwarp

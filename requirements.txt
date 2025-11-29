@@ -1,0 +1,29 @@
+# FastAPI and server
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6
+aiofiles>=23.2.1
+
+# Data processing
+pandas>=2.1.3
+numpy>=1.26.2
+
+# MS/MS data handling
+pymzml>=2.5.4
+matchms>=0.23.0
+ms2query>=1.5.4
+
+# Additional utilities
+pydantic>=2.5.0
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+pyyaml>=6.0  # For YAML parameter files
+
+# Optional: For XCMS processing
+# rpy2>=3.5.0  # R interface for Python (if using R XCMS)
+# pyopenms>=2.8.0  # OpenMS Python bindings (alternative to R XCMS)
+
+# Optional: For better performance
+# orjson>=3.9.0  # Faster JSON parsing
+# python-dotenv>=1.0.0  # Environment variable management
+
